@@ -1,0 +1,68 @@
+stats.ini infos:
+
+name, class, level, hero level and wormhole level are not part of that list.
+This file should only be used for other (less important) stats.
+
+The order in the .ini does not matter, the list will be sorted alphabetically
+by the [internalStatName]. To group certain values you can start the internal name with a number.
+
+[1c]
+[b]
+[1a]
+
+will result in
+
+[1a]
+[1c]
+[b]
+
+in the stat box.
+
+FORCED: all those keys have to be set properly, else the whole [stat] block will be skipped.
+There is no default value for these keys.
+
+DEFAULT: only add those if your value differs from the default value to reduce PC load.
+
+## all possible keys and = important values ##
+[internalStatName]                  UNIQUE internal name only first stat of that name will load.
+                                    camel case (thisIsAnExample) is used by me.
+FORCED      name                    in the editor
+FORCED      sectionName             in the save file @LocalAppDataDir & "\Hero_Siege\save_folder"
+FORCED      keyName                 in the save file @LocalAppDataDir & "\Hero_Siege\save_folder"
+
+shared
+    DEFAULT     =0                  herosiege0.pas to herosiege17.pas depending on char slot
+                =1                  shop.ini is used to save those (hero level, crystals etc.)
+type
+    DEFAULT     =updown             used for an integer (numbers, most stats)
+                =input              used for a string (text)
+                                    Any other type will cause the whole section to be skipped.
+min
+    DEFAULT     =0                  most stats can be 0
+                                    level and MAYBE some other stats require a value > 0
+                                    can be any integer from 0 to max (see below)
+max
+    DEFAULT     =987654321          that should be enough for any testing
+                                    can be any integer from min (see above) to 987654321
+                                    the hard limit of 987654321 can be changed in config.ini if needed
+                                    
+                                    if type=input it limits the number of characters possible
+                                    Example: the character name can have 15 characters (12 ingame)
+valuePrefix
+    DEFAULT     =""     'empty'     Default is an empty string as most values are just numbers.
+                =mining|            Allows to manipulate more complex values like the S9 mining quest.
+                                    For an example scroll down to ## examples ## [miningQuestS9]
+
+## template ##
+[xyz]
+name=
+sectionName=
+keyName=
+
+## examples ##
+[miningQuestS9]
+name=Mining Quest
+sectionName=4
+keyName=questlog_chain4
+max=2
+valuePrefix=mining|
